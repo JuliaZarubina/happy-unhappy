@@ -63,5 +63,4 @@ def main():
     db_session.commit()         
 
 if __name__ == '__main__':
-    main()
-    
+    main()  

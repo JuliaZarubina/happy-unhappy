@@ -31,5 +31,3 @@ if __name__ == '__main__':
     get_database_path()
     get_credentials()
     get_list_of_pages()
-
-    

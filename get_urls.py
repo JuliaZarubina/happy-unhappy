@@ -19,4 +19,3 @@ def create_urls(page_name, post_id='post_id'):
 
 if __name__ == '__main__':
     create_urls('name')
-

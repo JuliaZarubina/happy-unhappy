@@ -49,5 +49,4 @@ if __name__ == '__main__':
     post_comments_data = []
     post_id = '86680728811_10156375147413812'
     get_posts_comments('https://graph.facebook.com/86680728811_10156375147413812/comments/?key=value&access_token=519406221742449|35549d825f175df2a1c61c753c8def0b',
-        post_id, post_comments_data)
-
+        post_id, post_comments_data)   
