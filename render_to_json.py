@@ -11,4 +11,3 @@ def render_to_json(graph_url):
 if __name__ == '__main__':
     data = render_to_json('https://graph.facebook.com/esrigis?key=value&access_token=APP_ID|APP_SECRET')
     print(data)
-

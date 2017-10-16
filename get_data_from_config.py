@@ -3,7 +3,6 @@ import json
 def get_credentials():
     with open('config.json', 'r') as config:
         data = json.load(config, encoding ='utf-8')
-    
         APP_ID = data['credentials']['appId']
         APP_SECRET = data['credentials']['appSecret']
         token = '{}|{}'.format(APP_ID, APP_SECRET)
@@ -31,5 +30,3 @@ if __name__ == '__main__':
     get_database_path()
     get_credentials()
     get_list_of_pages()
-
-    
