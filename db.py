@@ -4,7 +4,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine('sqlite:///db/happy_unhappy.sqlite')
-
 db_session = scoped_session(sessionmaker(bind=engine))
 
 Base = declarative_base()

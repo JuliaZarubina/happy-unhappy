@@ -44,5 +44,9 @@ if __name__ == '__main__':
     date_str = '2017-10-10T23:59:59'
     target_date = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S')
     page_id = '211211155280'
-    scrape_posts_by_date('https://graph.facebook.com/esrigis/posts?/key=value&access_token=519406221742449|35549d825f175df2a1c61c753c8def0b',
-                        target_date, page_id, post_data)
+    scrape_posts_by_date('https://graph.facebook.com/esrigis/posts?/\
+        key=value&access_token=APP_ID|APP_SECRET',
+        target_date,
+        page_id,
+        post_data
+    )

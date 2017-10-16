@@ -39,7 +39,6 @@ def main():
             )
             db_session.add(post_db_row)
             db_session.commit() 
-
             urls = create_urls(page_name, post_id)
             comments_url = urls.get('comments_url')
             post_comments_data = []

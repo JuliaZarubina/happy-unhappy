@@ -9,6 +9,7 @@ def create_urls(page_name, post_id='post_id'):
     page_url = graph_url + page_name + page_args
     post_url = graph_url + page_name + post_args
     comments_url = graph_url + comments_args
+    
     urls = {
         'page_url': page_url,
         'post_url': post_url,
