@@ -10,7 +10,7 @@ def main():
     token = get_credentials()
     list_of_pages = get_list_of_pages()
     graph_url = 'https://graph.facebook.com/'
-    target_date = datetime.datetime.now() - datetime.timedelta(days=3)
+    target_date = datetime.datetime.now() - datetime.timedelta(days=1)
     target_date = target_date.replace(microsecond=0)
 
     for page in list_of_pages:
