@@ -2,6 +2,7 @@ import re
 import csv
 import string
 
+
 def process_message(message):
     # process the tweets
 
