@@ -1,8 +1,6 @@
 from clf_loader import clf_loader
 from process_message import process_message
 
-clf = clf_loader()
-
 def get_sentiment(message_text, clf):
     label = {0:'negative', 1:'positive'}
     list_for_clf = []
@@ -13,5 +11,6 @@ def get_sentiment(message_text, clf):
     return sentiment
 
 if __name__ == '__main__':
+    clf = clf_loader()
     result = get_sentiment('i love this dress')
     print(result)
