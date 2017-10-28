@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+       <link rel="shortcut icon" href="favicon.ico" type="image/png">
+
+        <meta charset="utf-8"/>
+        <title>Fashion comment</title>
+         <link rel= "stylesheet" href= "/static/css/style.css"/>
+		 <style>
+         #user {
+                width: 390px; /* Ширина поля в пикселах */
+				height: 130px
+                } 
+         </style>
+   </head>
+
+        <body style="background-image: url( {{url_for('static', filename='img/XoXo.png') }} )">
+		  
+        <h1 id ="title" onclick = "alert('Hello!');">Another Day Another Way ...</h1>
+        
+  <div> <h2 id ="contact"> <p align="right"> Contact us:<br>
+            email: 1@gmail.com <br>
+            FAQs: Visit the forum<br>
+            <img src="/static/img/facebook.png"><a href="https://www.facebook.com/mbfashionweekalmaty/">Facebook</a></p>
+             </h2></div>           
+  </div>  
+	
+
+            <div id="content" > It's like I can read your mind....
+
+                <form action="submit" id="textform" method="post">
+					<textarea name="text"id="user"></textarea><br>
+					<input type="submit" value="Submit">
+				</form> 
+            </div>
+            <a id="show-more">Show More</a>
+    <script type=text/javascript src="{{url_for('static', filename='js/ShowComments.js') }}"></script>
+               <div id = "Nav"> <p>Navigation:</p>
+            <p>1) Push on the title "Another Day..." and to say: "Hello!" :) <br>
+               2) Input your text and push "Submit" <br>
+               3) Push on Facebook's link and find more information about today</p>
+                </div>
+        </body>
+        
+     
+    </html>
+
