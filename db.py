@@ -17,6 +17,7 @@ class Posts(Base):
     message = Column(Text)
     created_time = Column(DateTime)
     page_id = Column(Text)
+    comment = relationship('Comments', backref = 'post')
 
     def __init__(
             self,
@@ -31,7 +32,7 @@ class Posts(Base):
         self.page_id = page_id
 
     def __repr__(self):
-        return '<Post {} {} {} {}>'.format(self.post_id, self.message)
+        return '<Post {} {}>'.format(self.post_id, self.message)
 
 class Comments(Base):
     __tablename__ = 'comments'
@@ -56,7 +57,7 @@ class Comments(Base):
         self.comment_sentiment = comment_sentiment
 
     def __repr__(self):
-        return 'Comment {} {} {} {}>'.format(self.comment_id, self.comment_message)
+        return 'Comment {} {}>'.format(self.comment_id, self.comment_message)
 
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)
