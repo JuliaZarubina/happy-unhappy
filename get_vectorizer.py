@@ -19,13 +19,3 @@ hv = HashingVectorizer(decode_error='ignore',
                         n_features=2**21,
                         preprocessor=None,
                         tokenizer=tokenizer)
-# def get_vect(tokenizer):
-#     hv = HashingVectorizer(decode_error='ignore', n_features=2**21,
-#                             preprocessor=None, tokenizer=tokenizer)
-#     return hv
-
-# if __name__ == '__main__':
-#     document = 'I love this dress!!!'
-#     print(tokenizer(document))
-#     hv = get_vect(tokenizer)
-#     print(hv.transform([document]))
