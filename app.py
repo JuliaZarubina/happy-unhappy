@@ -21,8 +21,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+	pos_list = []
+	neg_list = []
 	comments = Comments.query.all()
-	return render_template('index.html', comments=comments)
+	for comment_db_row in comments:
+		if comment_db_row.comment_sentiment == 'positive':
+			pos_list.append(comment_db_row)
+		else:
+			neg_list.append(comment_db_row)
+	return render_template('index.html', pos_comments=pos_list, neg_comments=neg_list)
 
 @app.route('/sentiment')
 def sentiment():
