@@ -3,6 +3,7 @@ from sklearn.externals import joblib
 import os
 import numpy as np
 from clf_loader import clf_loader
+from most_popular_posts import most_popular_posts
 from db import Comments, db_session
 
 # import HashingVectorizer from local dir
@@ -21,28 +22,47 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	pos_list = []
-	neg_list = []
-	comments = Comments.query.all()
-	for comment_db_row in comments:
-		if comment_db_row.comment_sentiment == 'positive':
-			pos_list.append(comment_db_row)
-		else:
-			neg_list.append(comment_db_row)
-	return render_template('index.html', pos_comments=pos_list, neg_comments=neg_list)
+	pos, neg = most_popular_posts()
+	return render_template('index.html', pos_posts=pos, neg_posts=neg)
 
-@app.route('/sentiment')
-def sentiment():
-	return render_template('sentiment.html')
+#Получение тональности он-лайн, добавила секцию ниже всех твоих, Навигация - Анализ фразы
 
-@app.route('/results', methods=['POST'])
+@app.route('/', methods=['POST'])
 def results():
 	review = request.form.get('fashionreview')
 	y, proba = classify(review)
-	return render_template('results.html',
+	return render_template('index.html',
 		content=review,
 		prediction=y,
 		probability=round(proba*100, 2))
+
+#Твои обработчики, не все поняла для чего..., все работало если даже оставить верхние два.
+
+@app.route('/')
+def main_form():
+    return '<form action="submit" id="textform" method="post"><textarea name="text">Hello World!</textarea><input type="submit" value="Submit"></form>'
+
+@app.route('/submit', methods=['POST'])
+def submit_textarea():
+    return "You entered: {}".format(request.form["text"])
+
+@app.route('/addRegion', methods=['POST'])
+def addRegion():
+    print(request.form['projectFilepath'])
+
+@app.route('/static/style.css')
+def send_css(path):
+    return send_from_directory('static', path)
+	
+@app.route('/users', methods=['POST'])
+def create_user():
+   print("Got Post Info")
+   name = request.form['name']
+   DojoLocation = request.form['location']
+   FavoriteLanguage = request.form['Language']
+   textarea = request.form['textarea']
+   # redirects back to the '/' route
+   return render_template('bk.html')	
 
 
 if __name__ == '__main__':

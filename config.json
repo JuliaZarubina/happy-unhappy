@@ -1,0 +1,30 @@
+{
+    "credentials": {
+        "appId": "519406221742449",
+        "appSecret": "35549d825f175df2a1c61c753c8def0b"
+    },
+    "pages": [
+        {"facebook_name": "AmsterdamFashionWeek", "id": 216740968376511},
+        {"facebook_name": "fashionweek", "id": 216740968376511},
+        {"facebook_name": "FashionWeekBand", "id": 216740968376511},
+        {"facebook_name": "nyfw", "id": 216740968376511},
+        {"facebook_name": "victoriafashionweek", "id": 216740968376511},
+        {"facebook_name": "berlinfashionweek", "id": 216740968376511},
+        {"facebook_name": "phxfashionweek", "id": 216740968376511},
+        {"facebook_name": "londonfashionweek", "id": 216740968376511},
+        {"facebook_name": "nyfwcollections", "id": 216740968376511},
+        {"facebook_name": "RueLaLa", "id": 216740968376511},
+        {"facebook_name": "hautelook", "id": 216740968376511},
+        {"facebook_name": "lordandtaylor", "id": 216740968376511},
+        {"facebook_name": "Tfashion2", "id": 216740968376511},
+        {"facebook_name": "LouisVuitton", "id": 216740968376511},
+        {"facebook_name": "converse", "id": 216740968376511},
+        {"facebook_name": "Zara", "id": 216740968376511},
+        {"facebook_name": "Dior", "id": 216740968376511},
+        {"facebook_name": "Burberry", "id": 216740968376511},
+        {"facebook_name": "BMichaelKors", "id": 216740968376511},
+        {"facebook_name": "RayBan", "id": 216740968376511}
+
+    ],   
+    "database_path": "sqlite:///db/happy_unhappy.sqlite"
+}

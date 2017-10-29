@@ -22,7 +22,6 @@ parts/
 sdist/
 var/
 wheels/
-db/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -101,6 +100,3 @@ ENV/
 
 # mypy
 .mypy_cache/
-
-# config
-config.json
