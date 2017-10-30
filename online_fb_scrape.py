@@ -2,7 +2,6 @@ import datetime
 from render_to_json import render_to_json
 from scrape_posts_by_date import scrape_posts_by_date
 from get_posts_comments import get_posts_comments
-from db import Posts, Comments, db_session
 from get_data_from_config import get_credentials, get_list_of_pages
 from get_urls import create_urls
 from classify import classify
@@ -45,8 +44,6 @@ def online_scrape(page):
         if post_comments:
             for comment in post_comments:
                 y, proba, clf = classify(comment['message'])
-                # print(y)
-                # print(proba)
                 total_list.append(comment)
                 if y == 'positive':
                     pos_list.append(comment)

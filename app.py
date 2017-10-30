@@ -8,31 +8,31 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    pos_posts, neg_posts = most_popular_posts()
-    return render_template('index.html',
-                            pos_posts=pos_posts,
-                            neg_posts=neg_posts)
-
-@app.route('/', methods=['POST'])
-def scrape():
-    fb_page = request.form.get('fb_name')
-    total, pos, neg = online_scrape(fb_page)
-    return render_template('index.html',
-                            total=total,
-                            pos=pos,
-                            neg=neg)
-
-@app.route('/', methods=['POST'])
-def results():
-    review = request.form.get('phrase')
-    y, proba, clf = classify(review)
-    return render_template('index.html',
-        content=review,
-        prediction=y,
-        probability=round(proba*100, 2))
-
-
-
+    if request.method == 'GET':
+        pos_posts, neg_posts = most_popular_posts()
+        return render_template('index.html',
+                                pos_posts=pos_posts,
+                                neg_posts=neg_posts)
+    
+@app.route('/', methods=["POST"])
+def analyze():    
+    if 'fb_name' in request.form:
+        fb_page = request.form.get('fb_name')
+        total, pos, neg = online_scrape(fb_page)
+        return render_template('index.html',
+                                _anchor='scrape',
+                                total=total,
+                                pos=pos,
+                                neg=neg)
+        
+    if 'phrase' in request.form: 
+        review = request.form.get('phrase')
+        y, proba, clf = classify(review)
+        return render_template('index.html',
+                            _anchor='result', 
+                            content=review,
+                            prediction=y,
+                            probability=round(proba*100, 2))
 
 # TODO
 @app.route('/')
