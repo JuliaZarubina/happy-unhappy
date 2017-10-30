@@ -29,12 +29,12 @@
 
   </head>
 
-  <body id="page-top">
+  <body id="/">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Анализатор комментариев социальных сетей</a>
+        <a class="navbar-brand js-scroll-trigger" href="/">Анализ комментариев социальных сетей</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -45,7 +45,7 @@
               <a class="nav-link js-scroll-trigger" href="#download">Топ5</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#features">Анализ по ссылке</a>
+              <a class="nav-link js-scroll-trigger" href="#features">Анализ страницы</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#online_sentiment">Анализ фразы</a>
@@ -117,7 +117,6 @@
          
               </div>
               <div class="col-md-6 mx-auto">Top 5 негативных постов
-               <!-- <h2>Striped Rows</h2> -->
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -142,7 +141,7 @@
           </div>
     </section>
 
-    <section class="features" id="features">
+<!--     <section class="features" id="features">
   <div class="container">
     <div class="section-heading text-center">
       <h2>Введите ссылку в поле:</h2>
@@ -172,21 +171,45 @@
 </section>
 </div>
 </div>
-</section>
+</section> -->
 
+    <section class="features" id="features">
+    <div class="container">
+      <div class="section-heading text-center">
+        <h2>Введите название страницы FaceBook:</h2>
+        <p class="text-muted">После нажатия на кнопку "Анализировать" будет произведен анализ контента этой страницы за день.</p>
+        <p class="text-muted">В результате вы получите соотношение позитивных и негативных комментариев.</p>
+          <form method="POST" action="#scrape">
+            <div class="form-group">
+              <input class="form-control input-lg" id="inputlg" type="text" name="fb_name">
+            </div>
+            <div>
+              <button type="submit" size="100" class="btn btn-default">Анализировать!</button>
+            </div>
+          </form> 
+          <br>
+         
+          <section class="download bg-primary text-center" id="scrape">
+          <div class="container">
+        <h3>Total number of comments:</h3>
+        <div><strong>{{ total }}</strong></div>
+        <h3>Final ratio:</h3>
+        <div>Positive: <strong>{{ pos }}</strong>
+        <div>Negative: <strong>{{ neg }}</strong>
+    </section>
+     </div>
+          </div>
+        </section>
 
     <section class="features" id="online_sentiment">
     <div class="container">
       <div class="section-heading text-center">
         <h2>Введите фразу на английском языке:</h2>
-    <!-- <div class="container"> -->
-    <!-- <h2>Sentiment analyzer</h2> -->
-        <p class="text-muted">После нажатия на кнопку "Анализировать", будет произведен анализ контента.</p>
-        <p class="text-muted">Вы получите тональность текста с некоторой вероятностью</p>
-          <form method="POST" action="/#result">
+        <p class="text-muted">После нажатия на кнопку "Анализировать" будет произведен анализ контента.</p>
+        <p class="text-muted">Вы получите тональность текста с некоторой вероятностью.</p>
+          <form method="POST" action="#result">
             <div class="form-group">
-              <!-- <label for="inputlg">Enter your pharse in English:</label> -->
-              <input class="form-control input-lg" id="inputlg" type="text" name="fashionreview">
+              <input class="form-control input-lg" id="inputlg" type="text" name="phrase">
             </div>
             <div>
               <button type="submit" size="100" class="btn btn-default">Анализировать!</button>
@@ -197,7 +220,6 @@
           <section class="download bg-primary text-center" id="result">
           <div class="container">
         <h3>Your phrase:</h3>
-
         <div>{{ content }}</div>
         <h3>Prediction:</h3>
         <div>This pharse is <strong>{{ prediction }}</strong>
@@ -207,10 +229,7 @@
           </div>
         </section>
 
-
     
-
-        
     <section class="contact bg-primary" id="contact">
       <div class="container">
         <h2>We
@@ -238,7 +257,7 @@
 
     <footer>
       <div class="container">
-        <p>&copy; 2017 Learn Python comand</p>
+        <p>&copy; 2017 Learn Python command</p>
         <ul class="list-inline">
           <li class="list-inline-item">
             <a href="#"></a>

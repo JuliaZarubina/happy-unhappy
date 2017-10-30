@@ -24,7 +24,6 @@
         {"facebook_name": "Burberry", "id": 216740968376511},
         {"facebook_name": "BMichaelKors", "id": 216740968376511},
         {"facebook_name": "RayBan", "id": 216740968376511}
-
     ],   
     "database_path": "sqlite:///db/happy_unhappy.sqlite"
 }
