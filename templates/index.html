@@ -148,8 +148,10 @@
         <p class="text-muted">После нажатия на кнопку "Анализировать" будет произведен анализ контента этой страницы за день.</p>
         <p class="text-muted">В результате вы получите соотношение позитивных и негативных комментариев.</p>
           <form method="POST" action="#scrape">
+            {{ form.hidden_tag() }}
             <div class="form-group">
-              <input class="form-control input-lg" id="inputlg" type="text" name="fb_name">
+              {{ form.fb_name(class="form-control input-lg") }}
+              <!-- <input class="form-control input-lg" id="inputlg" type="text" name="fb_name"> -->
             </div>
             <div>
               <button type="submit" size="100" class="btn btn-default" name="btn" value = "scrape" >Анализировать!</button>

@@ -4,38 +4,44 @@ from db import Comments, db_session
 from classify import classify
 from online_fb_scrape import online_scrape
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+from flask_wtf import FlaskForm
 
 SECRET_KEY = "asdfhjgfdsyuhgfcxdsrethgf"
 DEBUG = True
+WTF_CSRF_ENABLED = True
 # app.config['SECRET_KEY'] = b'\x97\xff\x83\xf6\x7f\x00lQ]\xc5r\ry9\xdd\r%j\x06\x0e\x1cJ\x84\xc6'
 
-class ReusableForm(Form):
-    name = StringField('Name:', validators=[validators.required()])
+
+class ReusableForm(FlaskForm):
+    fb_name = StringField('Name:', validators=[validators.required()])
+
+
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-    
-@app.route('/', methods=['GET','POST'])
+
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-  if request.method == 'GET':
-    pos_posts, neg_posts = most_popular_posts()
-  
-    return render_template('index.html',
-                          pos_posts=pos_posts,
-                          neg_posts=neg_posts)
+    form = ReusableForm()
+    if request.method == 'GET':
+        pos_posts, neg_posts = most_popular_posts()
+        return render_template('index.html',
+                               pos_posts=pos_posts,
+                               neg_posts=neg_posts,
+                               form=form)
 
-  form = ReusableForm()
-  if 'fb_name' in request.form and form.validate():
-    fb_page = request.form.get('fb_name')
-    total, pos, neg = online_scrape(fb_page)
+    if form.validate_on_submit():
+        fb_page = form.fb_name.data
+        total, pos, neg = online_scrape(fb_page)
 
-    return render_template('index.html',
-                            _anchor='scrape',
-                            total=total,
-                            pos=pos,
-                            neg=neg,
-                            form=form)
-      
+        return render_template('index.html',
+                               _anchor='scrape',
+                               total=total,
+                               pos=pos,
+                               neg=neg,
+                               form=form)
+
   # elif 'phrase' in request.form: 
   #   review = request.form.get('phrase')
   #   y, proba, clf = classify(review)
