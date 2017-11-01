@@ -12,3 +12,4 @@ scipy==0.19.1
 six==1.11.0
 SQLAlchemy==1.1.14
 Werkzeug==0.12.2
+WTForms==2.1
