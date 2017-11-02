@@ -1,5 +1,6 @@
 click==6.7
 Flask==0.12.2
+Flask-WTF==0.14.2
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
@@ -12,4 +13,4 @@ scipy==0.19.1
 six==1.11.0
 SQLAlchemy==1.1.14
 Werkzeug==0.12.2
-Flask-WTForms
+WTForms==2.1
