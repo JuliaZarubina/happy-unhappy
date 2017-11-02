@@ -2,83 +2,62 @@ from flask import Flask, redirect, url_for, render_template, request
 from most_popular_posts import most_popular_posts
 from db import Comments, db_session
 from classify import classify
+from check_page import check_page
 from online_fb_scrape import online_scrape
-from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from flask_wtf import FlaskForm
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+
 
 SECRET_KEY = "asdfhjgfdsyuhgfcxdsrethgf"
 DEBUG = True
 WTF_CSRF_ENABLED = True
-# app.config['SECRET_KEY'] = b'\x97\xff\x83\xf6\x7f\x00lQ]\xc5r\ry9\xdd\r%j\x06\x0e\x1cJ\x84\xc6'
 
-
-class ReusableForm(FlaskForm):
+class FBForm(FlaskForm):
     fb_name = StringField('Name:', validators=[validators.required()])
 
-
+class PhraseForm(FlaskForm):
+    user_phrase = StringField('Phrase:', validators=[validators.required()])
 
 app = Flask(__name__)
 app.config.from_object(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET','POST'])
 def index():
-    form = ReusableForm()
-    if request.method == 'GET':
-        pos_posts, neg_posts = most_popular_posts()
-        return render_template('index.html',
-                               pos_posts=pos_posts,
-                               neg_posts=neg_posts,
-                               form=form)
+    fb_page_form = FBForm()
+    user_phrase_form = PhraseForm()
 
-    if form.validate_on_submit():
-        fb_page = form.fb_name.data
+    if fb_page_form.validate_on_submit():
+        user_input = fb_page_form.fb_name.data
+        fb_page = check_page(user_input)   
         total, pos, neg = online_scrape(fb_page)
 
         return render_template('index.html',
-                               _anchor='scrape',
-                               total=total,
-                               pos=pos,
-                               neg=neg,
-                               form=form)
+                                total=total,
+                                pos=pos,
+                                neg=neg,
+                                fb_page_form=fb_page_form,
+                                user_phrase_form=user_phrase_form)
 
-  # elif 'phrase' in request.form: 
-  #   review = request.form.get('phrase')
-  #   y, proba, clf = classify(review)
+    if user_phrase_form.validate_on_submit(): 
+        phrase = user_phrase_form.user_phrase.data
+        y, proba, clf = classify(phrase)
+        prob = round(proba*100, 2)
 
-  #   return render_template('index.html',
-  #                       _anchor='result', 
-  #                       content=review,
-  #                       prediction=y,
-  #                       probability=round(proba*100, 2))
+        return render_template('index.html',
+                                content=phrase,
+                                prediction=y,
+                                probability=prob,
+                                user_phrase_form=user_phrase_form,
+                                fb_page_form=fb_page_form)
 
-# TODO
-# @app.route('/')
-# def main_form():
-#     return '<form action="submit" id="textform" method="post"><textarea name="text">Hello World!</textarea><input type="submit" value="Submit"></form>'
+    pos_posts, neg_posts = most_popular_posts() 
 
-# @app.route('/submit', methods=['POST'])
-# def submit_textarea():
-#     return "You entered: {}".format(request.form["text"])
-
-# @app.route('/addRegion', methods=['POST'])
-# def addRegion():
-#     print(request.form['projectFilepath'])
-
-# @app.route('/static/style.css')
-# def send_css(path):
-#     return send_from_directory('static', path)
-	
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#    print("Got Post Info")
-#    name = request.form['name']
-#    DojoLocation = request.form['location']
-#    FavoriteLanguage = request.form['Language']
-#    textarea = request.form['textarea']
-#    # redirects back to the '/' route
-#    return render_template('bk.html')	
-
+    return render_template('index.html',
+                            pos_posts=pos_posts,
+                            neg_posts=neg_posts,
+                            fb_page_form = fb_page_form,
+                            user_phrase_form=user_phrase_form)	
 
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0', port=5077)
+	app.run(debug=False, host='0.0.0.0', port=5077)

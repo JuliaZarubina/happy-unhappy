@@ -93,13 +93,13 @@
                 <h2 class="section-heading">Мы провели анализ постов:</h2>        
                </div>
                 <!-- <p>Наше приложение доступно на мобильном устройстве. Начать загрузку?<a href="google.com">...</a></p> -->
-                <div class="col-md-6 mx-auto">Top 5 позитивных постов
+                <div class="col-md-6 mx-auto">POSITIVE POSTS (TOP 5)
 
-                  <table class="table table-striped">
+                  <table class="table table-striped" align="text-center">
                     <thead>
                       <tr>
-                        <th>Кол-во (+) комментариев</th>
-                        <th>Пост</th>
+                        <th>Number of (+) comments</th>
+                        <th>Post</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -116,12 +116,12 @@
                   </table>
          
               </div>
-              <div class="col-md-6 mx-auto">Top 5 негативных постов
+              <div class="col-md-6 mx-auto"> NEGATIVE POSTS (TOP 5)
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Кол-во (-) комментариев</th>
-                      <th>Пост</th>
+                      <th>Number of (-) comments</th>
+                      <th>Post</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -145,12 +145,12 @@
     <div class="container">
       <div class="section-heading text-center">
         <h2>Введите название страницы FaceBook:</h2>
-        <p class="text-muted">После нажатия на кнопку "Анализировать" будет произведен анализ контента этой страницы за день.</p>
+        <p class="text-muted">После нажатия на кнопку "Анализировать" будет произведен анализ контента этой страницы за сутки.</p>
         <p class="text-muted">В результате вы получите соотношение позитивных и негативных комментариев.</p>
           <form method="POST" action="#scrape">
-            {{ form.hidden_tag() }}
+          {{ fb_page_form.hidden_tag() }}            
             <div class="form-group">
-              {{ form.fb_name(class="form-control input-lg") }}
+              {{ fb_page_form.fb_name(class="form-control input-lg") }}
               <!-- <input class="form-control input-lg" id="inputlg" type="text" name="fb_name"> -->
             </div>
             <div>
@@ -177,9 +177,11 @@
         <h2>Введите фразу на английском языке:</h2>
         <p class="text-muted">После нажатия на кнопку "Анализировать" будет произведен анализ контента.</p>
         <p class="text-muted">Вы получите тональность текста с некоторой вероятностью.</p>
-          <form method="POST" action="#result">
+          <form method="POST" action=#result>
+            {{ user_phrase_form.hidden_tag() }}
             <div class="form-group">
-              <input class="form-control input-lg" id="inputlg" type="text" name="phrase">
+              {{ user_phrase_form.user_phrase(class="form-control input-lg") }}
+              <!-- <input class="form-control input-lg" id="inputlg" type="text" name="user_phrase"> -->
             </div>
             <div>
               <button type="submit" size="100" class="btn btn-default" name="btn" value ="analyze">Анализировать!</button>

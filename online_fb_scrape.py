@@ -18,7 +18,6 @@ def online_scrape(page):
     page_id = json_fbpage.get('id')
     page_name = json_fbpage.get('name')
     page_data = {'id': page_id, 'name' : page_name}
-
     post_url = urls.get('post_url')
     scraped_posts_data = []
     scraped_posts_data = scrape_posts_by_date(
@@ -31,6 +30,9 @@ def online_scrape(page):
     pos_list = []
     neg_list = []
     total_list = []
+    total = 0
+    pos = 0
+    neg = 0
     for post in scraped_posts_data:
         post_id = post.get('id')
         urls = create_urls(page_name, post_id)
@@ -60,5 +62,4 @@ def online_scrape(page):
     return total, pos, neg       
 
 if __name__ == '__main__':
-    total, pos, neg = online_scrape('techcrunch')
-    print(total, pos, neg) 
+    total, pos, neg = online_scrape('esrigis')
