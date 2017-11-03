@@ -9,7 +9,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 
 
 SECRET_KEY = "asdfhjgfdsyuhgfcxdsrethgf"
-DEBUG = True
+DEBUG = False
 WTF_CSRF_ENABLED = True
 
 class FBForm(FlaskForm):
@@ -20,22 +20,31 @@ class PhraseForm(FlaskForm):
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+error_text = 'The page you requested can not be found.'
 
 
 @app.route('/', methods=['GET','POST'])
 def index():
     fb_page_form = FBForm()
     user_phrase_form = PhraseForm()
+    pos_posts, neg_posts = most_popular_posts() 
 
     if fb_page_form.validate_on_submit():
         user_input = fb_page_form.fb_name.data
-        fb_page = check_page(user_input)   
-        total, pos, neg = online_scrape(fb_page)
+        fb_page = check_page(user_input)
+        if not fb_page:
+            error = error_text
+            return error
+        else:   
+            total, pos, neg = online_scrape(fb_page)
 
         return render_template('index.html',
                                 total=total,
                                 pos=pos,
                                 neg=neg,
+                                error=error,
+                                pos_posts=pos_posts,
+                                neg_posts=neg_posts,
                                 fb_page_form=fb_page_form,
                                 user_phrase_form=user_phrase_form)
 
@@ -48,10 +57,11 @@ def index():
                                 content=phrase,
                                 prediction=y,
                                 probability=prob,
+                                pos_posts=pos_posts,
+                                neg_posts=neg_posts,
                                 user_phrase_form=user_phrase_form,
                                 fb_page_form=fb_page_form)
 
-    pos_posts, neg_posts = most_popular_posts() 
 
     return render_template('index.html',
                             pos_posts=pos_posts,
