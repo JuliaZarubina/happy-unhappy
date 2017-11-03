@@ -10,7 +10,7 @@ def render_to_json(graph_url):
     
         return json_data
 
-    except urllib.error.URLError as err:
+    except (urllib.error.URLError, urllib.error.HTTPError) as err:
 
         return None
 

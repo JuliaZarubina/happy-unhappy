@@ -20,7 +20,7 @@ class PhraseForm(FlaskForm):
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-error_text = 'The page you requested can not be found.'
+error = 'The page you requested can not be found.'
 
 
 @app.route('/', methods=['GET','POST'])
@@ -33,7 +33,6 @@ def index():
         user_input = fb_page_form.fb_name.data
         fb_page = check_page(user_input)
         if not fb_page:
-            error = error_text
             return error
         else:   
             total, pos, neg = online_scrape(fb_page)
@@ -57,6 +56,7 @@ def index():
                                 content=phrase,
                                 prediction=y,
                                 probability=prob,
+                                error=error,
                                 pos_posts=pos_posts,
                                 neg_posts=neg_posts,
                                 user_phrase_form=user_phrase_form,
